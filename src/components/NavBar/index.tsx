@@ -4,12 +4,12 @@ import BagIcon from '../../assets/bag-icon.svg';
 
 function NavBar() {
   return (
-    <nav className="flex h-24 items-center justify-between p-[40px]">
+    <aside className="flex h-24 items-center justify-between p-[40px]">
       <div>
         <img src={LogoNike} alt="nike-logo" className="w-[64px] h-[23px]" />
       </div>
 
-      <div className="flex justify-between items-center">
+      <nav className="flex justify-between items-center">
         <ul className="flex">
           <li className="box-border px-7 py-5 justify-center items-center">
             <a href="*" className="font-medium text-[16px] text-black leading-6 cursor-pointer capitalize">Seleção Brasileira</a>
@@ -50,8 +50,8 @@ function NavBar() {
         </div>
 
 
-      </div>
-    </nav>
+      </nav>
+    </aside>
   )
 }
 

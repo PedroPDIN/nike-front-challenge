@@ -3,7 +3,7 @@ import LogoSnkrs from '../../assets/snkrs.svg';
 
 function Header() {
   return (
-    <header className="flex bg-secondary justify-between items-center h-[40px] px-12">
+    <header className="flex bg-primary justify-between items-center h-[40px] px-12">
       <div className="flex w-[89px] h-[19px] justify-between">
         <img src={ LogoAirJordan } alt="airjordan-logo" className="w-[19px] h-[18px]" />
         <img src={LogoSnkrs} alt="snkrs-logo" className="w-[46px] h-[15px]" />

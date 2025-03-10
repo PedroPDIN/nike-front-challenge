@@ -39,13 +39,18 @@ function Product({ productId }: Props) {
         <div className="flex flex-col gap-1">
           <h3 className="font-semibold text-[16px] text-black">Tamanhos:</h3>
 
-          <div className="flex gap-2">
-            {product.available_sizes.map((size, index) => (
-              <div key={index} className="bg-primary py-1 px-3 rounded-md cursor-pointer hover:bg-gray-200">
-                {size}
-              </div>
-            ))}
-          </div>
+          {product.available_sizes.length === 0 ? (
+            <span className="my-[16px] text-[16px] font-medium text-red-600 mr-4">Esgotado</span>
+          ) : (
+            <div className="flex gap-2">
+              {product.available_sizes.map((size, index) => (
+                <div key={index} className="bg-primary py-1 px-3 rounded-md cursor-pointer hover:bg-gray-200">
+                  {size}
+                </div>
+              ))}
+            </div> 
+          )}
+
         </div>
 
         <div className="py-6">

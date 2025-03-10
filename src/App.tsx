@@ -8,10 +8,10 @@ import CardProduct from './components/CardProduct';
 import handleNumberColumns from './utils/handleNumberColumns';
 import getGridColumnsClass from './utils/getGridColumnsClass';
 import { getAllProducts } from './services/api/Product.api';
-
 import FilterIcon from './assets/filter-icon.svg';
 import { ProductsList } from './types/ProductsList.type';
 import { ColumnsEnum } from './enums/Column.enum';
+import Modal from './components/Modal';
 // import ArrowButtonIcon from './assets/arrow-button-icon.svg';
 // import ArrowTopIcon from './assets/arrow-top-icon.svg';
 
@@ -19,6 +19,7 @@ function App() {
   const [listColumns, setListColumns] = useState<boolean[]>([false, true, false]);
   const [numberColumns, setNumberColumns] = useState<ColumnsEnum>(ColumnsEnum.Three);
   const [productsList, setProductList] = useState<ProductsList>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   // const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -37,9 +38,12 @@ function App() {
     setNumberColumns(handleNumberColumns(index));
   };
 
+
   // const changeArrow = (value: boolean): void => {
   //   setIsOptionsOpen(value);
   // }
+
+  // console.log(openFilter)
   return (
     <>
       <Header />
@@ -67,7 +71,9 @@ function App() {
             </button>
           </div>
 
-          <button type="button" className="flex items-center justify-center">
+          <button
+            type="button"
+            className="flex items-center justify-center">
             <span className="leading-5 font-normal text-xl cursor-pointer outline-none text-secondary">Filtros</span>
             <img src={FilterIcon} alt="filter-icon" className="text-primary w-4 h-4 ml-2  " />
           </button>
@@ -89,7 +95,7 @@ function App() {
           </div>
         </aside>
 
-        <main className="bg-red-600">
+        <main>
 
           <div className="flex flex-row justify-center ">
             <div className={`grid gap-[16px] ${getGridColumnsClass(numberColumns)}`}>
@@ -97,13 +103,19 @@ function App() {
                 <CardProduct
                   key={product.id}
                   products={product}
-                  numberColumns={numberColumns} />
+                  numberColumns={numberColumns}
+                  setIsModalOpen={setIsModalOpen} />
               ))}
             </div>
           </div>
         </main>
 
       </section>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h2 className="text-xl font-semibold">Título do Modal</h2>
+        <p className="mt-2">Este é um modal reutilizável na sua aplicação!</p>
+      </Modal>
     </>
   );
 }

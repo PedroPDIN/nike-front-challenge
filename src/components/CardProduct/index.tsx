@@ -3,10 +3,11 @@ import { IProduct } from "../../interfaces/IProduct.interface";
 
 interface Props {
   products: IProduct;
-  numberColumns: ColumnsEnum;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  numberColumns?: ColumnsEnum;
 }
 
-function CardProduct({ products, numberColumns }: Props) {
+function CardProduct({ products, numberColumns, setIsModalOpen }: Props) {
   const { image_url, name, price, sport } = products;
 
   const getImageSize = () => {
@@ -18,7 +19,7 @@ function CardProduct({ products, numberColumns }: Props) {
   }
 
   return (
-    <div className="flex flex-col">
+    <button className="flex flex-col" onClick={() => setIsModalOpen(true)}>
       <div className={ getImageSize() }>
         <img src={image_url} alt={name} />
       </div>
@@ -28,7 +29,7 @@ function CardProduct({ products, numberColumns }: Props) {
         <span className="text-[16px] font-normal text-secondary">{ sport }</span>
         <span className="my-[16px] text-[16px] font-medium">R$ {price}</span>
       </div>
-    </div>
+    </button>
   )
 
 }

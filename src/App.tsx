@@ -1,25 +1,41 @@
 // import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Header from './components/Header';
 import NavBar from './components/NavBar';
+import CardProduct from './components/CardProduct';
+import handleNumberColumns from './utils/handleNumberColumns';
+import { getAllProducts } from './services/api/Product.api';
 
 import FilterIcon from './assets/filter-icon.svg';
+import { ProductsList } from './types/ProductsList.type';
+import { ColumnsEnum } from './enums/Column.enum';
 // import ArrowButtonIcon from './assets/arrow-button-icon.svg';
 // import ArrowTopIcon from './assets/arrow-top-icon.svg';
 
 function App() {
-  const [listColumnsList, setListColumnsList] = useState<boolean[]>([false, false, false]);
+  const [listColumnsList, setListColumnsList] = useState<boolean[]>([false, true, false]);
+  const [numberColumns, setNumberColumns] = useState<ColumnsEnum>(ColumnsEnum.Three);
+  const [productsList, setProductList] = useState<ProductsList>([]);
   // const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const dataProductsService = async () => {
+      const products = await getAllProducts();
+      setProductList(products);
+    }
+
+    dataProductsService();
+  }, [])
 
   const handleButtonClick = (index: number): void => {
     const newListColumnsList = [...listColumnsList];
 
     for (const item of listColumnsList.keys()) {
       if (item === index) {
-        console.log(item, index)
         newListColumnsList[index] = !newListColumnsList[index];
+        setNumberColumns(handleNumberColumns(index))
       } else {
         newListColumnsList[item] = false;
       }
@@ -80,8 +96,18 @@ function App() {
               <img src={isOptionsOpen ? ArrowTopIcon : ArrowButtonIcon} alt="arrow-icon" />
             </div> */}
           </div>
-
         </aside>
+
+        <main>
+
+          <div className="flex justify-center">
+            <div className={`grid gap-[16px] grid-cols-${numberColumns}`}>
+              {productsList.map((product) => (
+                <CardProduct products={product} numberColumns={numberColumns} />
+              ))}
+            </div>
+          </div>
+        </main>
 
       </section>
     </>

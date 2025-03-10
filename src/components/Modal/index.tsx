@@ -11,7 +11,7 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white p-2 rounded-lg shadow-lg w-[400px] relative">
+      <div className="bg-white p-2 rounded-lg shadow-lg w-[70%] relative">
         <div className="flex justify-end items-center pb-2">
           <button
             onClick={onClose}

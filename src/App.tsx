@@ -1,24 +1,28 @@
 // import logo from './logo.svg';
 import './App.css';
+import { ColumnsEnum } from './enums/Column.enum';
+import { ProductsList } from './types/ProductsList.type';
+import { getAllProducts } from './services/api/Product.api';
 import { useState, useEffect } from 'react';
 
+import Modal from './components/Modal';
 import Header from './components/Header';
 import NavBar from './components/NavBar';
+import Product from './components/Product';
+import FilterIcon from './assets/filter-icon.svg';
 import CardProduct from './components/CardProduct';
 import handleNumberColumns from './utils/handleNumberColumns';
 import getGridColumnsClass from './utils/getGridColumnsClass';
-import { getAllProducts } from './services/api/Product.api';
-import FilterIcon from './assets/filter-icon.svg';
-import { ProductsList } from './types/ProductsList.type';
-import { ColumnsEnum } from './enums/Column.enum';
-import Modal from './components/Modal';
 // import ArrowButtonIcon from './assets/arrow-button-icon.svg';
 // import ArrowTopIcon from './assets/arrow-top-icon.svg';
 
 function App() {
+  const [productsList, setProductList] = useState<ProductsList>([]);
+  const [productId, setProductId] = useState<number>(0);
+
   const [listColumns, setListColumns] = useState<boolean[]>([false, true, false]);
   const [numberColumns, setNumberColumns] = useState<ColumnsEnum>(ColumnsEnum.Three);
-  const [productsList, setProductList] = useState<ProductsList>([]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   // const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
 
@@ -43,7 +47,7 @@ function App() {
   //   setIsOptionsOpen(value);
   // }
 
-  // console.log(openFilter)
+  // console.log(productId)
   return (
     <>
       <Header />
@@ -104,17 +108,16 @@ function App() {
                   key={product.id}
                   products={product}
                   numberColumns={numberColumns}
-                  setIsModalOpen={setIsModalOpen} />
+                  setIsModalOpen={setIsModalOpen}
+                  setProductId={setProductId} />
               ))}
             </div>
           </div>
         </main>
-
       </section>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className="text-xl font-semibold">Título do Modal</h2>
-        <p className="mt-2">Este é um modal reutilizável na sua aplicação!</p>
+        <Product productId={ productId }/>
       </Modal>
     </>
   );

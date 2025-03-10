@@ -1,6 +1,6 @@
-import LogoNike from '../../assets/nike.svg';
-import SearchIcon from '../../assets/search-icon.svg';
-import BagIcon from '../../assets/bag-icon.svg';
+import LogoNike from "../../assets/nike.svg";
+import BagIcon from "../../assets/bag-icon.svg";
+import SearchIcon from "../../assets/search-icon.svg";
 
 function NavBar() {
   return (
@@ -48,8 +48,6 @@ function NavBar() {
             <img src={BagIcon} alt="bag-icon" className="w-7 h-7" />
           </button>
         </div>
-
-
       </nav>
     </aside>
   )

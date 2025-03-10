@@ -1,39 +1,43 @@
 // import logo from './logo.svg';
 import './App.css';
-import { ColumnsEnum } from './enums/Column.enum';
-import { ProductsList } from './types/ProductsList.type';
-import { getAllProducts } from './services/api/Product.api';
-import { useState, useEffect } from 'react';
-
-import Modal from './components/Modal';
-import Header from './components/Header';
-import NavBar from './components/NavBar';
-import Product from './components/Product';
-import FilterIcon from './assets/filter-icon.svg';
-import CardProduct from './components/CardProduct';
-import handleNumberColumns from './utils/handleNumberColumns';
-import getGridColumnsClass from './utils/getGridColumnsClass';
-// import ArrowButtonIcon from './assets/arrow-button-icon.svg';
-// import ArrowTopIcon from './assets/arrow-top-icon.svg';
+import Modal from "./components/Modal";
+import Header from "./components/Header";
+import NavBar from "./components/NavBar";
+import Product from "./components/Product";
+import { useState, useEffect } from "react";
+import { ColumnsEnum } from "./enums/Column.enum";
+import FilterIcon from "./assets/filter-icon.svg";
+import CardProduct from "./components/CardProduct";
+import FilterSidebar from "./components/FilterSidebar";
+import { ProductsList } from "./types/ProductsList.type";
+import { getAllProducts } from "./services/api/Product.api";
+import handleNumberColumns from "./utils/handleNumberColumns";
+import getGridColumnsClass from "./utils/getGridColumnsClass";
 
 function App() {
   const [productsList, setProductList] = useState<ProductsList>([]);
+  const [filteredProductsList, setFilteredProductsList] = useState<ProductsList>([]);
   const [productId, setProductId] = useState<number>(0);
+  const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
 
   const [listColumns, setListColumns] = useState<boolean[]>([false, true, false]);
   const [numberColumns, setNumberColumns] = useState<ColumnsEnum>(ColumnsEnum.Three);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const dataProductsService = async () => {
       const products = await getAllProducts();
       setProductList(products);
+      setFilteredProductsList(products);
     }
-    
+
     dataProductsService();
   }, [])
+
+  useEffect(() => {
+    setFilteredProductsList(productsList);
+  }, [productsList, isOpenFilter]);
 
   const handleButtonClick = (index: number): void => {
     const newListColumns = listColumns.map((_, i) => (i === index ? !listColumns[i] : false));
@@ -42,16 +46,14 @@ function App() {
     setNumberColumns(handleNumberColumns(index));
   };
 
+  const handleOpenFilter = () => {
+    setIsOpenFilter(!isOpenFilter);
+  }
 
-  // const changeArrow = (value: boolean): void => {
-  //   setIsOptionsOpen(value);
-  // }
-
-  // console.log(productId)
   return (
     <>
       <Header />
-      <section>
+      <section className="mb-60">
         <NavBar />
 
         <aside className="flex justify-end gap-[24px] items-center p-11">
@@ -77,7 +79,8 @@ function App() {
 
           <button
             type="button"
-            className="flex items-center justify-center">
+            className="flex items-center justify-center"
+            onClick={() => handleOpenFilter()}>
             <span className="leading-5 font-normal text-xl cursor-pointer outline-none text-secondary">Filtros</span>
             <img src={FilterIcon} alt="filter-icon" className="text-primary w-4 h-4 ml-2  " />
           </button>
@@ -85,34 +88,37 @@ function App() {
           <div className="relative flex">
             <select
               name="order"
-              id=""
+              value="order"
+              id="order"
               className='flex items-center cursor-pointer p-3 rounded-full appearance-none w-40 text-left border-none'>
               <option value="" disabled selected className="hidden">Ordenar por</option>
               <option value="sm-price" className="options-order">Menos Preço</option>
               <option value="big-price" className="cursor-pointer">Maior Preço</option>
               <option value="number-sizes" className="cursor-pointer">Quantidade de Tamanhos</option>
             </select>
-
-            {/* <div className="absolute right-0 top-3">
-              <img src={isOptionsOpen ? ArrowTopIcon : ArrowButtonIcon} alt="arrow-icon" />
-            </div> */}
           </div>
         </aside>
 
-        <main>
+        <main className="flex justify-center">
+          {isOpenFilter && (
+            <FilterSidebar
+              productsList={productsList}
+              setFilteredProductsList={setFilteredProductsList} />
+          )}
 
-          <div className="flex flex-row justify-center ">
+          <aside className="flex flex-row justify-center ">
             <div className={`grid gap-[16px] ${getGridColumnsClass(numberColumns)}`}>
-              {productsList.map((product) => (
+              {filteredProductsList.map((product) => (
                 <CardProduct
                   key={product.id}
                   products={product}
                   numberColumns={numberColumns}
                   setIsModalOpen={setIsModalOpen}
-                  setProductId={setProductId} />
+                  setProductId={setProductId}
+                  isOpenFilter={isOpenFilter} />
               ))}
             </div>
-          </div>
+          </aside>
         </main>
       </section>
 

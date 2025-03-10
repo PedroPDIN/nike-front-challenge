@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getByIdProduct } from "../../services/api/Product.api";
 import { IProduct } from "../../interfaces/IProduct.interface";
+import { getByIdProduct } from "../../services/api/Product.api";
 
 interface Props {
   productId: number;
@@ -21,7 +21,7 @@ function Product({ productId }: Props) {
   if (!product) return <p>Carregando...</p>;
 
   return (
-    <div className="flex justify-between p-4 gap-6">
+    <section className="flex justify-between p-4 gap-6">
       <div className="w-[50%]">
         <img src={ product.image_url } alt={ product.name } />
       </div>
@@ -63,7 +63,7 @@ function Product({ productId }: Props) {
         </div>
 
       </div>
-    </div>
+    </section>
   )
 }
 

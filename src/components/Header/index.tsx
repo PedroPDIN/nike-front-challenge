@@ -1,5 +1,5 @@
-import LogoAirJordan from '../../assets/airjordan.svg';
-import LogoSnkrs from '../../assets/snkrs.svg';
+import LogoSnkrs from "../../assets/snkrs.svg";
+import LogoAirJordan from "../../assets/airjordan.svg";
 
 function Header() {
   return (

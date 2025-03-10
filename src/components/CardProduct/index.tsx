@@ -1,17 +1,22 @@
-import { ColumnsEnum } from "../../enums/Column.enum";
 import { IProduct } from "../../interfaces/IProduct.interface";
+import { ColumnsEnum } from "../../enums/Column.enum";
 
 interface Props {
   products: IProduct;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setProductId: React.Dispatch<React.SetStateAction<number>>; 
   numberColumns?: ColumnsEnum;
+  isOpenFilter?: boolean;
 }
 
-function CardProduct({ products, numberColumns, setIsModalOpen, setProductId }: Props) {
+function CardProduct({ products, numberColumns, setIsModalOpen, setProductId, isOpenFilter }: Props) {
   const { id, image_url, name, price, sport, available_sizes } = products;
 
   const getImageSize = () => {
+    if (isOpenFilter) {
+      return "w-[260px] h-[260px]"
+    }
+
     if (numberColumns === ColumnsEnum.Four) {
       return "w-[320px] h-[320px]"
     };

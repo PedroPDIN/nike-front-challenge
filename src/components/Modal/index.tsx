@@ -4,7 +4,7 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
-}
+};
 
 function Modal({ isOpen, onClose, children }: ModalProps) {
   if (!isOpen) return null;
@@ -24,6 +24,6 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
       </div>
     </div>
   );
-}
+};
 
 export default Modal;

@@ -1,15 +1,16 @@
 import { ColumnsEnum } from "../enums/Column.enum"
 
 const handleNumberColumns = (indexColumn: number) => {
-  if (indexColumn === 0) {
-    return ColumnsEnum.Two
+  switch (indexColumn) {
+    case 0:
+      return ColumnsEnum.Two;
+    case 1:
+      return ColumnsEnum.Three;
+    case 2:
+      return ColumnsEnum.Four;
+    default:
+      return ColumnsEnum.Three;
   }
-
-  if (indexColumn === 1) {
-    return ColumnsEnum.Three;
-  }
-
-  return ColumnsEnum.Four;
 }
 
 export default handleNumberColumns;

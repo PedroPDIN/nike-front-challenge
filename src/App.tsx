@@ -6,6 +6,7 @@ import Header from './components/Header';
 import NavBar from './components/NavBar';
 import CardProduct from './components/CardProduct';
 import handleNumberColumns from './utils/handleNumberColumns';
+import getGridColumnsClass from './utils/getGridColumnsClass';
 import { getAllProducts } from './services/api/Product.api';
 
 import FilterIcon from './assets/filter-icon.svg';
@@ -15,7 +16,7 @@ import { ColumnsEnum } from './enums/Column.enum';
 // import ArrowTopIcon from './assets/arrow-top-icon.svg';
 
 function App() {
-  const [listColumnsList, setListColumnsList] = useState<boolean[]>([false, true, false]);
+  const [listColumns, setListColumns] = useState<boolean[]>([false, true, false]);
   const [numberColumns, setNumberColumns] = useState<ColumnsEnum>(ColumnsEnum.Three);
   const [productsList, setProductList] = useState<ProductsList>([]);
   // const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
@@ -25,29 +26,20 @@ function App() {
       const products = await getAllProducts();
       setProductList(products);
     }
-
+    
     dataProductsService();
   }, [])
 
   const handleButtonClick = (index: number): void => {
-    const newListColumnsList = [...listColumnsList];
+    const newListColumns = listColumns.map((_, i) => (i === index ? !listColumns[i] : false));
 
-    for (const item of listColumnsList.keys()) {
-      if (item === index) {
-        newListColumnsList[index] = !newListColumnsList[index];
-        setNumberColumns(handleNumberColumns(index))
-      } else {
-        newListColumnsList[item] = false;
-      }
-    }
-
-    setListColumnsList(newListColumnsList);
-  }
+    setListColumns(newListColumns);
+    setNumberColumns(handleNumberColumns(index));
+  };
 
   // const changeArrow = (value: boolean): void => {
   //   setIsOptionsOpen(value);
   // }
-
   return (
     <>
       <Header />
@@ -55,24 +47,23 @@ function App() {
         <NavBar />
 
         <aside className="flex justify-end gap-[24px] items-center p-11">
-
           <div className="flex gap-9">
             <button onClick={() => handleButtonClick(0)} className="flex gap-[2px]">
-              <div className={`${listColumnsList[0] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
-              <div className={`${listColumnsList[0] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
+              <div className={`${listColumns[0] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
+              <div className={`${listColumns[0] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
             </button>
 
             <button onClick={() => handleButtonClick(1)} className="flex gap-[2px]">
-              <div className={`${listColumnsList[1] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
-              <div className={`${listColumnsList[1] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
-              <div className={`${listColumnsList[1] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
+              <div className={`${listColumns[1] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
+              <div className={`${listColumns[1] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
+              <div className={`${listColumns[1] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
             </button>
 
             <button onClick={() => handleButtonClick(2)} className="flex gap-[2px]">
-              <div className={`${listColumnsList[2] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
-              <div className={`${listColumnsList[2] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
-              <div className={`${listColumnsList[2] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
-              <div className={`${listColumnsList[2] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
+              <div className={`${listColumns[2] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
+              <div className={`${listColumns[2] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
+              <div className={`${listColumns[2] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
+              <div className={`${listColumns[2] ? "border-black border" : "border-secondary border"} rounded-[4px] p-3`}></div>
             </button>
           </div>
 
@@ -98,12 +89,15 @@ function App() {
           </div>
         </aside>
 
-        <main>
+        <main className="bg-red-600">
 
-          <div className="flex justify-center">
-            <div className={`grid gap-[16px] grid-cols-${numberColumns}`}>
+          <div className="flex flex-row justify-center ">
+            <div className={`grid gap-[16px] ${getGridColumnsClass(numberColumns)}`}>
               {productsList.map((product) => (
-                <CardProduct products={product} numberColumns={numberColumns} />
+                <CardProduct
+                  key={product.id}
+                  products={product}
+                  numberColumns={numberColumns} />
               ))}
             </div>
           </div>

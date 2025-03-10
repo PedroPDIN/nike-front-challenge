@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Desafio Front-End
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Este desafio é uma aplicação de e-commerce construída com React, inspirada na página oficial da Nike. A aplicação permite a navegação por diferentes produtos, com filtros para tamanho de roupa e calçado (em breve novas funcionalidade de filtro).
 
-In the project directory, you can run:
+## Tecnologias Utilizadas
+* [ReactJS](https://pt-br.react.dev/)
+* [Tailwindcss v3.4.17](https://v3.tailwindcss.com/)
 
-### `npm start`
+## Funcionalidades
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Renderização dos produtos com nome, preço e imagem.
+2. Ao interagir com o produto é renderizado um modal com os detalhes do produto
+3. Implementação de filtragem por tamanho de roupa e calçado.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Instalação
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone o repositório:
+~~~
+git clone git@github.com:PedroPDIN/nike-front-challenge.git
+~~~
 
-### `npm run build`
+2. Após executar o comando do git clone, acesse o diretório criado através desse comando:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+~~~
+cd nike-front-challenge
+~~~
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Instale as Dependências:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+~~~
+npm install
+~~~
 
-### `npm run eject`
+4. Por fim, para rodar a aplicação:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+~~~
+npm start
+~~~
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Estrutura do projeto
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+* `src/`: Contém todos os arquivos fonte da aplicação.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  * `components/`: Componentes React reutilizáveis.
+  * `services/`: Funções de chamada para as APIs.
+  * `assets/:` Imagens e ícones utilizados na aplicação.
+  * `interfaces/:` Contrato de tipagens para aplicação.
+  * `types/:` Tipos personalizados para dados da aplicação.
+  * `enums/:` Conjuntos de constantes nomeadas.
+  * `utils/:` Funções complementares e reutilizáveis.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---

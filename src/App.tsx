@@ -1,5 +1,3 @@
-// import logo from './logo.svg';
-import './App.css';
 import Modal from "./components/Modal";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
@@ -92,7 +90,7 @@ function App() {
               id="order"
               className='flex items-center cursor-pointer p-3 rounded-full appearance-none w-40 text-left border-none'>
               <option value="" disabled selected className="hidden">Ordenar por</option>
-              <option value="sm-price" className="options-order">Menos Preço</option>
+              <option value="sm-price" className="cursor-pointer">Menos Preço</option>
               <option value="big-price" className="cursor-pointer">Maior Preço</option>
               <option value="number-sizes" className="cursor-pointer">Quantidade de Tamanhos</option>
             </select>

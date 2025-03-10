@@ -3,6 +3,11 @@
 
 Este desafio é uma aplicação de e-commerce construída com React, inspirada na página oficial da Nike. A aplicação permite a navegação por diferentes produtos, com filtros para tamanho de roupa e calçado (em breve novas funcionalidade de filtro).
 
+## ❗ Observações Importantes
+
+* Essa aplicação é dependente totalmente do back-end, ou seja, é necessário instalar o projeto `nike-back-challenge`, que por sua vez é o back-end do desafio. No README no projeto `nike-back-challenge` estará as instruções necessárias para a instalação do back-end, link para acessar o repositório (back-end) [aqui](https://github.com/PedroPDIN/nike-back-challenge).
+
+
 ## Tecnologias Utilizadas
 * [ReactJS](https://pt-br.react.dev/)
 * [Tailwindcss v3.4.17](https://v3.tailwindcss.com/)

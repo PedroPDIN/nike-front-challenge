@@ -1,7 +1,7 @@
 # Desafio Front-End
 
 
-Este desafio é uma aplicação de e-commerce construída com React, inspirada na página oficial da Nike. A aplicação permite a navegação por diferentes produtos, com filtros para tamanho de roupa e calçado (em breve novas funcionalidade de filtro).
+Este desafio é uma aplicação de front-end construída com React, inspirada na página oficial da Nike. A aplicação permite a navegação por diferentes produtos, com filtros para tamanho de roupa e calçado (em breve novas funcionalidade de filtro).
 
 ## ❗ Observações Importantes
 
@@ -10,6 +10,7 @@ Este desafio é uma aplicação de e-commerce construída com React, inspirada n
 
 ## Tecnologias Utilizadas
 * [ReactJS](https://pt-br.react.dev/)
+* [Typescript](https://www.typescriptlang.org/docs/)
 * [Tailwindcss v3.4.17](https://v3.tailwindcss.com/)
 
 ## Funcionalidades
